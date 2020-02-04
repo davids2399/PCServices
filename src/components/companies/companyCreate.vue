@@ -3,13 +3,13 @@
     <q-dialog v-model="form.done">
       <q-card>
         <q-card-section>
-          <div v-if="form.success" class="text-h6">Tecnico añadido con éxito</div>
-          <div v-else class="text-h6">Tecnico no pudo ser añadido</div>
+          <div v-if="form.success" class="text-h6">Compañia añadida con éxito</div>
+          <div v-else class="text-h6">Compañia no pudo ser añadida</div>
         </q-card-section>
 
         <q-card-section class="q-pt-none">
           <div v-if="form.success">Presione aceptar para salir</div>
-          <div v-else>Por alguna razon el tecnico no pudo ser añadido, intentelo de nuevo mas tarde</div>
+          <div v-else>Por alguna razon la compañia no pudo ser añadida, intentelo de nuevo mas tarde</div>
           <div></div>
         </q-card-section>
 
@@ -20,26 +20,18 @@
     </q-dialog>
     <div class="q-py-md column">
       <div class="col">
-        <p class="text-lg text-medium mb-4">Registrar nuevo técnico</p>
+        <p class="text-lg text-medium mb-4">Registrar nueva compañia</p>
       </div>
 
       <q-form
         class="q-gutter-md"
-        ref="createEngineerForm"
+        ref="createCompanyForm"
         @submit="onSubmit"
       >
         <q-input
           filled
           v-model="form.name"
-          label="Nombre(s) *"
-          lazy-rules
-          :rules="[ val => val && val.length > 0 || 'No dejar el campo vacío']"
-        />
-
-        <q-input
-          filled
-          v-model="form.lastname"
-          label="Apellidos *"
+          label="Nombre *"
           lazy-rules
           :rules="[ val => val && val.length > 0 || 'No dejar el campo vacío']"
         />
@@ -80,12 +72,11 @@
 import { axiosInstance } from 'boot/axios'
 
 export default {
-  name: 'EngineerCreate',
+  name: 'CompanyCreate',
   data () {
     return {
       form: {
         name: '',
-        lastname: '',
         email: '',
         password: '',
         isPwd: true,
@@ -97,9 +88,8 @@ export default {
   methods: {
     onSubmit: function () {
       var that = this;
-      axiosInstance.post('/api/users', {
+      axiosInstance.post('/api/companies', {
         name: that.form.name,
-        lastname: that.form.lastname,
         email: that.form.email,
         password: that.form.password
       })
@@ -107,14 +97,13 @@ export default {
         if(response.data.result){
           this.form = {
             name: '',
-            lastname: '',
             email: '',
             password: '',
             isPwd: true,
             done: true,
             success: true
           }
-          this.$refs.createEngineerForm.reset(evt)
+          this.$refs.createCompanyForm.reset()
         } else {
           this.form.done = true
           this.form.success = false

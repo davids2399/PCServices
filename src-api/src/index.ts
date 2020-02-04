@@ -7,7 +7,8 @@ import cors from 'cors';
 
 //Rutas que manejara el servidor
 import IndexRoutes from './routes/indexRoutes';
-import UsersRoutes from './routes/UsersRoutes'
+import UsersRoutes from './routes/usersRoutes';
+import CompaniesRoutes from './routes/companiesRoutes'
 
 //Se crea una clase que sera la que realize la logia de nuestro servidor 
 class Server{
@@ -44,6 +45,7 @@ class Server{
     routes(): void{
         this.app.use(IndexRoutes);
         this.app.use('/api/users', UsersRoutes);
+        this.app.use('/api/companies', CompaniesRoutes);
     }
 
     //Este metodo sera el que inicialize nuestro servidor

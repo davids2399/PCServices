@@ -6,6 +6,6 @@
 
 <script>
 export default {
-  name: 'Engineers'
+  name: 'Companies'
 }
 </script>
