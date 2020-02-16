@@ -16,6 +16,13 @@ const routes = [
           { path: '', component: () => import('components/companies/companyList.vue') },
           { path: 'create', component: () => import('components/companies/companyCreate.vue') }
         ]
+      },
+      {
+        path: '/computers', component: () => import('pages/Computers.vue'),
+        children: [
+          { path: '', component: () => import('components/computers/computerList.vue') },
+          { path: 'create', component: () => import('components/computers/computerCreate.vue') }
+        ]
       }
     ]
   }

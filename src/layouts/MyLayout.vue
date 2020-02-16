@@ -59,6 +59,23 @@
             </q-item-section>
           </q-item>
         </q-expansion-item>
+        <q-expansion-item
+          group="mainmenu"
+          expand-separator
+          icon="computer"
+          label="Equipos"
+          >
+          <q-item clickable tag="a" href="/#/computers">
+            <q-item-section>
+              <q-item-label>Ver todos</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item clickable tag="a" href="/#/computers/create">
+            <q-item-section>
+              <q-item-label>Añadir equipo</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-expansion-item>
       </q-list>
     </q-drawer>
 
