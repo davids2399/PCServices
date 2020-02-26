@@ -10,7 +10,6 @@
         <q-card-section class="q-pt-none">
           <div v-if="form.success">Presione aceptar para salir</div>
           <div v-else>Por alguna razon la compañia no pudo ser añadida, intentelo de nuevo mas tarde</div>
-          <div></div>
         </q-card-section>
 
         <q-card-actions align="right">
@@ -19,8 +18,8 @@
       </q-card>
     </q-dialog>
     <div class="q-py-md column">
-      <div class="col">
-        <p class="text-lg text-medium mb-4">Registrar nueva compañia</p>
+      <div class="q-px-md col">
+        <p class="text-h5 text-medium mb-4">Añadir compañia</p>
       </div>
 
       <q-form

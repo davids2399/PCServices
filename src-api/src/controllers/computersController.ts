@@ -48,7 +48,7 @@ class ComputersController{
             brand: row['brand'],
             serial_number: row['serial_number'],
             QR: row['QR'],
-            create_date: row['create_date']
+            created_at: row['created_at']
         }
 
         //Empujamos nuestra fila al arreglo de usuarios
@@ -96,7 +96,7 @@ class ComputersController{
             brand: row['brand'],
             serial_number: row['serial_number'],
             QR: row['QR'],
-            create_date: row['create_date']
+            created_at: row['created_at']
         }
 
         //Y continuamos con la query

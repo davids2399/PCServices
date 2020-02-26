@@ -26,53 +26,20 @@
       <q-list>
         <q-item-label header>Menu</q-item-label>
         <q-expansion-item
+          v-for="(item, index) in menuItems"
+          :key="index"
           group="mainmenu"
           expand-separator
-          icon="build"
-          label="Tecnicos"
-          >
-          <q-item clickable tag="a" href="/#/engineers/">
+          :icon="item.icon"
+          :label="item.label">
+          <q-item clickable tag="a" :href="'/#/' + item.baseUrl + '/'">
             <q-item-section>
-              <q-item-label>Ver todos</q-item-label>
+              <q-item-label>{{ item.seeAllText }}</q-item-label>
             </q-item-section>
           </q-item>
-          <q-item clickable tag="a" href="/#/engineers/create">
+          <q-item clickable tag="a" :href="'/#/' + item.baseUrl + '/create'">
             <q-item-section>
-              <q-item-label>Añadir tecnico</q-item-label>
-            </q-item-section>
-          </q-item>
-        </q-expansion-item>
-        <q-expansion-item
-          group="mainmenu"
-          expand-separator
-          icon="apartment"
-          label="Empresas"
-          >
-          <q-item clickable tag="a" href="/#/companies">
-            <q-item-section>
-              <q-item-label>Ver todas</q-item-label>
-            </q-item-section>
-          </q-item>
-          <q-item clickable tag="a" href="/#/companies/create">
-            <q-item-section>
-              <q-item-label>Añadir empresa</q-item-label>
-            </q-item-section>
-          </q-item>
-        </q-expansion-item>
-        <q-expansion-item
-          group="mainmenu"
-          expand-separator
-          icon="computer"
-          label="Equipos"
-          >
-          <q-item clickable tag="a" href="/#/computers">
-            <q-item-section>
-              <q-item-label>Ver todos</q-item-label>
-            </q-item-section>
-          </q-item>
-          <q-item clickable tag="a" href="/#/computers/create">
-            <q-item-section>
-              <q-item-label>Añadir equipo</q-item-label>
+              <q-item-label>{{ item.createText }}</q-item-label>
             </q-item-section>
           </q-item>
         </q-expansion-item>
@@ -91,7 +58,37 @@ export default {
 
   data () {
     return {
-      leftDrawerOpen: false
+      leftDrawerOpen: false,
+      menuItems: [
+        {
+          icon: 'build',
+          label: 'Tecnicos',
+          baseUrl: 'engineers',
+          seeAllText: 'Ver todos',
+          createText: 'Añadir tecnico'
+        },
+        {
+          icon: 'apartment',
+          label: 'Empresas',
+          baseUrl: 'companies',
+          seeAllText: 'Ver todas',
+          createText: 'Añadir empresa'
+        },
+        {
+          icon: 'computer',
+          label: 'Equipos',
+          baseUrl: 'computers',
+          seeAllText: 'Ver todos',
+          createText: 'Añadir equipo'
+        },
+        {
+          icon: 'assignment_turned_in',
+          label: 'Reportes',
+          baseUrl: 'reports',
+          seeAllText: 'Ver todos',
+          createText: 'Crear reporte'
+        }
+      ]
     }
   }
 }

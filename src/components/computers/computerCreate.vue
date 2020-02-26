@@ -19,8 +19,8 @@
       </q-card>
     </q-dialog>
     <div class="q-py-md column">
-      <div class="col">
-        <p class="text-lg text-medium mb-4">Registrar nuevo equipo</p>
+      <div class="q-px-md col">
+        <p class="text-h5 text-medium mb-4">Registrar nuevo equipo</p>
       </div>
 
       <q-form
