@@ -1,2 +1,3 @@
-export function someAction (/* context */) {
+export function login ({ commit }, isCompany) {
+    commit('login', isCompany)
 }

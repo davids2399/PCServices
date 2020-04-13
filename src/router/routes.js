@@ -16,13 +16,34 @@ const routes = [
           ]
         }
       },
-      { path: '/engineers', component: () => import('pages/Engineers.vue'),
+      {
+        path: '/engineers',
+        component: () => import('pages/Engineers.vue'),
         children: [
-          { path: '', component: () => import('components/engineers/engineerList.vue') },
-          { path: 'create', component: () => import('components/engineers/engineerCreate.vue') }
+          { path: '', component: () => import('components/engineers/engineerList.vue'), 
+            meta: {
+              middleware: [
+                authUser
+              ]
+            },
+          },
+          { path: 'create', component: () => import('components/engineers/engineerCreate.vue'),
+            meta: {
+              middleware: [
+                authUser
+              ]
+            },
+          }
         ]
       },
-      { path: '/companies', component: () => import('pages/Companies.vue'),
+      {
+        path: '/companies',
+        component: () => import('pages/Companies.vue'),
+        meta: {
+          middleware: [
+            authUser
+          ]
+        },
         children:[
           { path: '', component: () => import('components/companies/companyList.vue') },
           { path: 'create', component: () => import('components/companies/companyCreate.vue') }
@@ -30,6 +51,11 @@ const routes = [
       },
       {
         path: '/computers', component: () => import('pages/Computers.vue'),
+        meta: {
+          middleware: [
+            authUser
+          ]
+        },
         children: [
           { path: '', component: () => import('components/computers/computerList.vue') },
           { path: 'create', component: () => import('components/computers/computerCreate.vue') }
@@ -37,6 +63,11 @@ const routes = [
       },
       {
         path: '/reports', component: () => import('pages/Reports.vue'),
+        meta: {
+          middleware: [
+            authUser
+          ]
+        },
         children: [
           { path: '', component: () => import('components/reports/reportList.vue') },
           { path: 'create', component: () => import('components/reports/reportCreate.vue') }

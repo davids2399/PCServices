@@ -12,6 +12,7 @@ import CompaniesRoutes from './routes/companiesRoutes';
 import ComputersRoutes from './routes/computersRoutes';
 import ReportsRoutes from './routes/reportsRoutes';
 import ServicesRoutes from './routes/servicesRoutes';
+import LoginRoutes from './routes/loginRoutes';
 
 //Se crea una clase que sera la que realize la logia de nuestro servidor 
 class Server{
@@ -52,6 +53,7 @@ class Server{
         this.app.use('/api/computers', ComputersRoutes);
         this.app.use('/api/reports', ReportsRoutes);
         this.app.use('/api/services', ServicesRoutes);
+        this.app.use('/api/login', LoginRoutes);
     }
 
     //Este metodo sera el que inicialize nuestro servidor

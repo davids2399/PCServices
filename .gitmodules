@@ -1,0 +1,3 @@
+[submodule "PCServices-api"]
+	path = src-api
+	url = https://github.com/llWolfz/PCServices-api

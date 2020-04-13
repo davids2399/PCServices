@@ -30,18 +30,33 @@
           :key="index"
           group="mainmenu"
           expand-separator
+          :class="item.allowed || isAdmin ? '' : 'hidden'"
           :icon="item.icon"
           :label="item.label">
-          <q-item clickable tag="a" :href="'/#/' + item.baseUrl + '/'">
-            <q-item-section>
-              <q-item-label>{{ item.seeAllText }}</q-item-label>
-            </q-item-section>
-          </q-item>
-          <q-item clickable tag="a" :href="'/#/' + item.baseUrl + '/create'">
-            <q-item-section>
-              <q-item-label>{{ item.createText }}</q-item-label>
-            </q-item-section>
-          </q-item>
+          <template v-if="!isAdmin">
+            <q-item v-if="item.seeAllText.allowed" clickable tag="a" :href="'/#/' + item.baseUrl + '/'">
+              <q-item-section>
+                <q-item-label>{{ item.seeAllText.text }}</q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item v-if="item.createText.allowed" clickable tag="a" :href="'/#/' + item.baseUrl + '/create'">
+              <q-item-section>
+                <q-item-label>{{ item.createText.text }}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </template>
+          <template v-else>
+            <q-item clickable tag="a" :href="'/#/' + item.baseUrl + '/'">
+              <q-item-section>
+                <q-item-label>{{ item.seeAllText.text }}</q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item tag="a" :href="'/#/' + item.baseUrl + '/create'">
+              <q-item-section>
+                <q-item-label>{{ item.createText.text }}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </template>
         </q-expansion-item>
       </q-list>
     </q-drawer>
@@ -55,41 +70,91 @@
 <script>
 export default {
   name: 'MyLayout',
-
   data () {
     return {
       leftDrawerOpen: false,
+      userType: '',
+      isAdmin: false,
       menuItems: [
         {
+          allowed: false,
           icon: 'build',
           label: 'Tecnicos',
           baseUrl: 'engineers',
-          seeAllText: 'Ver todos',
-          createText: 'Añadir tecnico'
+          seeAllText: { text: 'Ver todos', allowed: false },
+          createText: { text: 'Añadir tecnico', allowed: false }
         },
         {
+          allowed: false,
           icon: 'apartment',
           label: 'Empresas',
           baseUrl: 'companies',
-          seeAllText: 'Ver todas',
-          createText: 'Añadir empresa'
+          seeAllText: { text: 'Ver todas', allowed: false },
+          createText: { text: 'Añadir empresa', allowed: false },
         },
         {
+          allowed: false,
           icon: 'computer',
           label: 'Equipos',
           baseUrl: 'computers',
-          seeAllText: 'Ver todos',
-          createText: 'Añadir equipo'
+          seeAllText: { text: 'Ver todos', allowed: false },
+          createText: { text: 'Añadir equipo', allowed: false }
         },
         {
+          allowed: false,
           icon: 'assignment_turned_in',
           label: 'Reportes',
           baseUrl: 'reports',
-          seeAllText: 'Ver todos',
-          createText: 'Crear reporte'
+          seeAllText: { text: 'Ver todos', allowed: false },
+          createText: { text: 'Crear reporte', allowed: false }
         }
       ]
     }
+  },
+  created () {
+    var count = 0
+    var that = this
+    this.isAdmin = this.$store.state.login.user.isAdmin
+    this.menuItems.forEach(function(item){
+      switch (count) {
+        case 0:
+          if (that.$store.state.login.user.isCompany){
+            item.allowed = false
+          } else {
+            item.allowed = false
+          }
+          break;
+        case 1:
+          if (that.$store.state.login.user.isCompany){
+            item.allowed = false
+          } else {
+            item.allowed = false
+          }
+          break;
+        case 2:
+          if (that.$store.state.login.user.isCompany){
+            item.allowed = false
+          } else {
+            item.allowed = true
+            item.seeAllText.allowed = true
+            item.createText.allowed = true
+          }
+          break;
+        case 3:
+          if (that.$store.state.login.user.isCompany){
+            item.allowed = true
+            item.seeAllText.allowed = true
+            item.createText.allowed = false
+          } else {
+            item.allowed = true
+            item.seeAllText.allowed = true
+            item.createText.allowed = true
+          }
+          break;
+      }
+      count++
+    });
+    console.log(this.menuItems)
   }
 }
 </script>

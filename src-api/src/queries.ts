@@ -14,6 +14,9 @@ export class Queries{
 
     services = 'SELECT * FROM services';
     service = 'SELECT * FROM services';
+
+    loginUser = "SELECT * FROM users";
+    loginCompany = "SELECT * FROM companies";
 }
 
 export const usersQuery = new Queries().users;
@@ -32,3 +35,6 @@ export const reportsWithFK = new Queries().reportsWithFK;
 
 export const servicesQuery = new Queries().services;
 export const serviceQuery = new Queries().service;
+
+export const loginUser = new Queries().loginUser;
+export const loginCompany = new Queries().loginCompany;
