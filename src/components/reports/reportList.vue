@@ -63,7 +63,6 @@ export default {
     axiosInstance.get('/api/reports?reportList=true')
     .then((response) => {
       if(response.data.result){
-        console.log(response.data.data)
         that.data = response.data.data
       }
     }, (error) => {

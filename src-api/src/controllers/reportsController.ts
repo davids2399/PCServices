@@ -17,12 +17,9 @@ class ReportsController{
         //Primeramente creamos nuestra conexion con nuestra query indicada
         var query;
         if(!(Object.entries(req.query).length === 0 && req.query.constructor === Object)) {
-            console.log(req.query.reportList)
             if(req.query.reportList) {
-                console.log('custom query')
                 query = connection.query(reportsWithFK);
             } else {
-                console.log('normal query 2')
                 query = connection.query(reportsQuery);
             }
         } else {
@@ -132,7 +129,7 @@ class ReportsController{
             //Generamos nuestra variable que se convertira en nuestro JSON
             var result;
             //Si nuesto objeto no se define o esta vacio...
-            if(report == undefined || report == null ){
+            if(report == undefined || report == null){
                 //Devolvemos que nuestra busqueda no arrojo resultados
                 result = { result: false, data: {}}
                 
