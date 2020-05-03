@@ -26,8 +26,7 @@
       <q-form
         class="q-gutter-md"
         ref="createComputerForm"
-        @submit="onSubmit"
-      >
+        @submit="onSubmit">
         <q-input
           filled
           v-model="form.brand"
@@ -48,15 +47,23 @@
           <q-btn class="mt-4" label="Enviar" type="submit" color="primary"/>
         </div>
       </q-form>
+
+      <qrcode-stream :camera="'auto'" @decode="onDecode">
+      </qrcode-stream>
     </div>
   </div>
 </template>
 
 <script>
 import { axiosInstance } from 'boot/axios'
+// https://github.com/patrickmonteiro/quasar-qrcode-reader
+import { QrcodeStream } from 'vue-qrcode-reader'
 
 export default {
   name: 'ComputerCreate',
+  components: {
+    QrcodeStream 
+  },
   data () {
     return {
       form: {
@@ -64,7 +71,8 @@ export default {
         serial_number: '',
         done: false,
         success: false
-      }
+      },
+      result: null,
     }
   },
   methods: {
@@ -90,7 +98,11 @@ export default {
       }, (error) => {
         console.log(error)
       })
-    }
+    },
+    async onDecode (content) {
+      this.result = content
+      console.log(content)
+    },
   }
 }
 </script>
