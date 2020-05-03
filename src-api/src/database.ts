@@ -13,7 +13,7 @@ pool.getConnection()
    //en caso de funcionar manda el mensaje que la base de datos se encuentra funcional
    console.log('DB is connected');
 });
-
+console.log(keys.database);
 //Creamos una segunda conexion de tipo mysql
 var mysql2 = require('mysql');
 var var2 = mysql2.createConnection(keys.database);
