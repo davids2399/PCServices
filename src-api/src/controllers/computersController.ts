@@ -22,8 +22,11 @@ class ComputersController{
                 whereClause += ' brand LIKE \'%' + req.query.search + '%\' OR';
                 whereClause += ' serial_number LIKE \'%' + req.query.search + '%\'';
                 query = connection.query(computersQuery + whereClause);
-            } else if(req.query.computerList) {
+            } 
+            
+            if(req.query.computerList) {
                 query = connection.query(computersWithFK);
+                console.log(query)
             }
         } else {
             query = connection.query(computersQuery);
@@ -44,6 +47,8 @@ class ComputersController{
 
         //Y se los asignamos al usuario
         var computer = {}
+        console.log(row);
+        console.log("----**");
 
         if(!(Object.entries(req.query).length === 0 && req.query.constructor === Object)) {
             if(req.query.computerList) {
@@ -83,6 +88,8 @@ class ComputersController{
         .on('end', function() {
             //Creamos nuestra variable result, la cual sera la que se convertira en nuestra respuesta JSON
             var result;
+            console.log("computers --");
+            console.log(computers);
             //Si obtenemos mas de 1 resultado, regresamos verdadero 
             if(computers.length > 0 ){
                 result = { result: true, data: computers}

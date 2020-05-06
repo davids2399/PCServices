@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -37,8 +38,9 @@ class ComputersController {
                     whereClause += ' serial_number LIKE \'%' + req.query.search + '%\'';
                     query = database_1.connection.query(queries_1.computersQuery + whereClause);
                 }
-                else {
-                    query = database_1.connection.query(queries_1.computersQuery);
+                if (req.query.computerList) {
+                    query = database_1.connection.query(queries_1.computersWithFK);
+                    console.log(query);
                 }
             }
             else {
@@ -59,13 +61,39 @@ class ComputersController {
                 //por cada "row" o fila, pausamos la query
                 database_1.connection.pause();
                 //Y se los asignamos al usuario
-                var computer = {
-                    idComputer: row['id'],
-                    brand: row['brand'],
-                    serial_number: row['serial_number'],
-                    QR: row['QR'],
-                    created_at: row['created_at']
-                };
+                var computer = {};
+                console.log(row);
+                console.log("----**");
+                if (!(Object.entries(req.query).length === 0 && req.query.constructor === Object)) {
+                    if (req.query.computerList) {
+                        computer = {
+                            idComputer: row['id'],
+                            company: row['company'],
+                            brand: row['brand'],
+                            serial_number: row['serial_number'],
+                            QR: row['QR'],
+                            created_at: row['created_at']
+                        };
+                    }
+                    else {
+                        computer = {
+                            idComputer: row['id'],
+                            brand: row['brand'],
+                            serial_number: row['serial_number'],
+                            QR: row['QR'],
+                            created_at: row['created_at']
+                        };
+                    }
+                }
+                else {
+                    computer = {
+                        idComputer: row['id'],
+                        brand: row['brand'],
+                        serial_number: row['serial_number'],
+                        QR: row['QR'],
+                        created_at: row['created_at']
+                    };
+                }
                 //Empujamos nuestra fila al arreglo de usuarios
                 computers.push(computer);
                 //Y continuamos con la query
@@ -74,6 +102,8 @@ class ComputersController {
                 .on('end', function () {
                 //Creamos nuestra variable result, la cual sera la que se convertira en nuestra respuesta JSON
                 var result;
+                console.log("computers --");
+                console.log(computers);
                 //Si obtenemos mas de 1 resultado, regresamos verdadero 
                 if (computers.length > 0) {
                     result = { result: true, data: computers };
@@ -140,11 +170,12 @@ class ComputersController {
         return __awaiter(this, void 0, void 0, function* () {
             var that = this;
             //Obtenemos la password
-            const { brand, serial_number, QR } = req.body;
+            const { brand, serial_number, QR, company_id } = req.body;
             var computer = {
                 brand: brand,
                 serial_number: serial_number,
-                QR: QR
+                QR: QR,
+                company_id: company_id
             };
             //convertimos nuestro objeto en una query
             var querycomputer = database_1.connection.escape(computer);
