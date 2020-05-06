@@ -123,12 +123,13 @@ class ComputersController{
     public async create(req: Request, res: Response){
         var that = this;
         //Obtenemos la password
-        const { brand, serial_number , QR } = req.body;
+        const { brand, serial_number , QR , company_id } = req.body;
 
         var computer = {
             brand: brand,
             serial_number: serial_number,
-            QR: QR
+            QR: QR,
+            company_id: company_id
         }
 
         //convertimos nuestro objeto en una query
