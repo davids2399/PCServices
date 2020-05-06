@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 //importamos las queries necesarias
-import { computersQuery , computerQuery } from '../queries';
+import { computersQuery , computerQuery, computersWithFK } from '../queries';
 //Y nuestro metodo para encriptar
 import { cryptPassword } from '../encrypt'
 
@@ -22,8 +22,8 @@ class ComputersController{
                 whereClause += ' brand LIKE \'%' + req.query.search + '%\' OR';
                 whereClause += ' serial_number LIKE \'%' + req.query.search + '%\'';
                 query = connection.query(computersQuery + whereClause);
-            } else {
-                query = connection.query(computersQuery);
+            } else if(req.query.computerList) {
+                query = connection.query(computersWithFK);
             }
         } else {
             query = connection.query(computersQuery);
@@ -43,12 +43,35 @@ class ComputersController{
         connection.pause(); 
 
         //Y se los asignamos al usuario
-        var computer = {
-            idComputer: row['id'], 
-            brand: row['brand'],
-            serial_number: row['serial_number'],
-            QR: row['QR'],
-            created_at: row['created_at']
+        var computer = {}
+
+        if(!(Object.entries(req.query).length === 0 && req.query.constructor === Object)) {
+            if(req.query.computerList) {
+                computer = {
+                    idComputer: row['id'],
+                    company: row['company'],
+                    brand: row['brand'],
+                    serial_number: row['serial_number'],
+                    QR: row['QR'],
+                    created_at: row['created_at']
+                }
+            } else {
+                computer = {
+                    idComputer: row['id'], 
+                    brand: row['brand'],
+                    serial_number: row['serial_number'],
+                    QR: row['QR'],
+                    created_at: row['created_at']
+                }
+            }
+        } else {
+            computer = {
+                idComputer: row['id'], 
+                brand: row['brand'],
+                serial_number: row['serial_number'],
+                QR: row['QR'],
+                created_at: row['created_at']
+            }
         }
 
         //Empujamos nuestra fila al arreglo de usuarios

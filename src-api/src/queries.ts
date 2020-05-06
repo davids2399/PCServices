@@ -7,6 +7,7 @@ export class Queries{
 
     computers = 'SELECT * FROM computers';
     computer = 'SELECT * FROM computers';
+    computersWithFK = 'SELECT computers.id, companies.name as \'company\', computers.brand, computers.serial_number, computers.QR, computers.created_at FROM computers LEFT JOIN companies ON companies.id = computers.company_id'
 
     reports = 'SELECT * FROM reports';
     report = 'SELECT * FROM reports';
@@ -27,6 +28,7 @@ export const companyQuery = new Queries().company;
 
 export const computersQuery = new Queries().computers;
 export const computerQuery = new Queries().computer;
+export const computersWithFK = new Queries().computersWithFK;
 
 export const reportsQuery = new Queries().reports;
 export const reportQuery = new Queries().report;
