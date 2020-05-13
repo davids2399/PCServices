@@ -1,12 +1,12 @@
 <template>
-  <div class="w-full">
+  <q-page class="bg-white w-full">
     <q-table
     title="Reportes creados"
     :data="data"
     :columns="columns"
     row-key="idReport"
     />
-  </div>
+  </q-page>
 </template>
 
 <script>

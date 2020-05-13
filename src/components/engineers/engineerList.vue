@@ -1,12 +1,12 @@
 <template>
-  <div class="w-full">
+  <q-page class="bg-white w-full">
     <q-table
     title="Tecnicos registrados"
     :data="data"
     :columns="columns"
     row-key="idUser"
     />
-  </div>
+  </q-page>
 </template>
 
 <script>

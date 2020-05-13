@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <q-page class="bg-white w-full p-8">
     <q-dialog v-model="form.done">
       <q-card>
         <q-card-section>
@@ -73,7 +73,7 @@
         </div>
       </q-form>
     </div>
-  </div>
+  </q-page>
 </template>
 
 <script>

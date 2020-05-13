@@ -15,6 +15,31 @@
 
 <script>
 export default {
-  name: 'LoginLayout'
+  name: 'LoginLayout',
+  methods: {
+    cameraPermission() {
+      var vm = this
+      var permissions = cordova.plugins.permissions;
+      permissions.checkPermission(permissions.CAMERA, function( status ) {
+        if ( status.hasPermission ) {
+          console.log("Yes :D ");
+        }
+        else {
+          vm.$q.dialog({
+            title: 'Permisos',
+            message: 'No se han dado permisos para acceder a la camara'
+          })
+        }
+      });
+
+      permissions.requestPermission(permissions.CAMERA, success, error);
+      function error() {
+        console.warn('Camera permission is not turned on');
+      }
+      function success( status ) {
+        if( !status.hasPermission ) error();
+      }
+    },
+  }
 }
 </script>

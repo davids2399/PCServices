@@ -1,9 +1,9 @@
 {
   "name": "pcservices",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Mobile app created for pcservices",
-  "productName": "PcServices app",
-  "cordovaId": "org.cordova.quasar.app",
+  "productName": "PcServices for users",
+  "cordovaId": "org.cordova.quasar.users",
   "capacitorId": "",
   "author": "llWolfz <davidsagozz@hotmail.com>",
   "private": true,
@@ -13,6 +13,7 @@
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "axios": "^0.18.1",
+    "cordova-plugin-qrscanner": "^3.0.1",
     "quasar": "^1.0.0",
     "tailwindcss": "^1.1.4",
     "vue-qrcode-reader": "^2.1.1"

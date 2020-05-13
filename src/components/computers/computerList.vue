@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full">
+  <q-page class="bg-white w-full">
     <q-table
       title="Equipos registrados"
       :data="data"
@@ -18,7 +18,7 @@
         </q-input>
       </template>
     </q-table>
-  </div>
+  </q-page>
 </template>
 
 <script>

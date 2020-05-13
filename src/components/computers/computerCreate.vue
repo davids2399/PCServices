@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <q-page class="bg-white w-full p-8">
     <q-dialog v-model="form.done">
       <q-card>
         <q-card-section>
@@ -43,15 +43,18 @@
           :rules="[ val => val && val.length > 0 || 'No dejar el campo vacío']"
         />
 
-        <div>
-          <q-btn class="mt-4" label="Enviar" type="submit" color="primary"/>
+        <div class="row justify-around mt-4">
+          <!-- <q-btn icon="add_a_photo" @click="$router.push('/scan')" label="crear QR"></q-btn> -->
+          <q-btn icon="camera_alt" @click="$router.push('/scan')" label="añadir QR"></q-btn>
+        </div>
+
+        <div class="row justify-around mt-4">
+          <q-btn label="Enviar" type="submit" color="primary"/>
         </div>
       </q-form>
 
-      <qrcode-stream :camera="'auto'" @decode="onDecode">
-      </qrcode-stream>
     </div>
-  </div>
+  </q-page>
 </template>
 
 <script>
@@ -66,6 +69,9 @@ export default {
   },
   data () {
     return {
+      showCamera: false,
+      maximizedToggle: true,
+      isScanning: false,
       form: {
         brand: '',
         serial_number: '',
@@ -98,10 +104,6 @@ export default {
       }, (error) => {
         console.log(error)
       })
-    },
-    async onDecode (content) {
-      this.result = content
-      console.log(content)
     },
   }
 }

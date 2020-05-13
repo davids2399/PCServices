@@ -72,6 +72,14 @@ const routes = [
           { path: '', component: () => import('components/reports/reportList.vue') },
           { path: 'create', component: () => import('components/reports/reportCreate.vue') }
         ]
+      },
+      {
+        path: '/scan', component: () => import('components/scan.vue'),
+        meta: {
+          middleware: [
+            authUser
+          ]
+        }
       }
     ]
   },

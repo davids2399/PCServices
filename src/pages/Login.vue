@@ -5,7 +5,7 @@
         <div class="col-3 flex text-h4 justify-center items-center">
           <div>Iniciar sesión</div>
         </div>
-        <div class="col-3 q-px-md q-gutter-md">
+        <div class="col q-px-md q-gutter-md">
           <q-input outlined v-model="form.email" label="Correo" />
           <q-input outlined v-model="form.password" label="Contraseña" type="password" />
           <q-checkbox v-model="form.isCompany" label="Iniciar como empresa" />

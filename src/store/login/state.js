@@ -1,7 +1,7 @@
 export default function () {
   return {
     user: {
-      isAdmin: true,
+      isAdmin: false,
       isCompany: false,
       loggedIn: false
     }
